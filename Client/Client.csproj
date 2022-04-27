@@ -1,0 +1,63 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <Nullable>warnings</Nullable>
+    <UseWPF>true</UseWPF>
+    <StartupObject></StartupObject>
+    <ApplicationIcon>CovTraker.ico</ApplicationIcon>
+    <PlatformTarget>x86</PlatformTarget>
+    <Version>$(VersionPrefix)</Version>
+    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+    <Authors>Van Duy Quang, Phan Dinh Anh Quan, Ngo Thanh Hai</Authors>
+    <Product>Client CovTraker 2021</Product>
+    <Description>Program to keep track of the world's cases of Covid-19.</Description>
+    <Copyright></Copyright>
+    <PackageIcon>CovTraker.ico</PackageIcon>
+    <PackageId>$(AssemblyName) CovTraker 2021</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Fonts\MyFont-Regular.otf" />
+    <None Remove="Fonts\Password1.ttf" />
+    <None Remove="Fonts\segmdl2.ttf" />
+    <None Remove="Fonts\SegoeBold.ttf" />
+    <None Remove="Fonts\SegoeBoldNew.ttf" />
+    <None Remove="Fonts\SEGOEUI-VF.TTF" />
+    <None Remove="Fonts\SegoeUIVariableStaticDisplay.ttf" />
+    <None Remove="Fonts\SegoeUIVariableStaticDisplayBold.ttf" />
+    <None Remove="Fonts\SegoeUIVariableStaticDisplaySemibold.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="CovTraker.ico" />
+    <Resource Include="Fonts\SegoeUIVariableStaticDisplay.ttf" />
+    <Resource Include="Fonts\SegoeUIVariableStaticDisplayBold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\Duy Quang\Documents\icobundle-1.2b1\CovTraker.ico">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\Password1.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\segmdl2.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\SEGOEUI-VF.TTF">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\SegoeUIVariableStaticDisplaySemibold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>

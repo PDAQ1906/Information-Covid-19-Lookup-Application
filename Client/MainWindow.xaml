@@ -1,0 +1,133 @@
+﻿<Window x:Class="Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client"
+        Closing="Window_Closing"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="CovTraker 2021" Height="680" Width="638" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" Background="{x:Null}">
+    <Window.Resources>
+        <ResourceDictionary Source="Styles/Style.xaml">
+
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid x:Name="MainWindowName" Width="480" Height="580" SnapsToDevicePixels="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid  Grid.RowSpan="2">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="25" Color="Black" Opacity="0.1"  RenderingBias="Quality" />
+            </Grid.Effect>
+            <Rectangle HorizontalAlignment="Left" Height="{Binding Height, ElementName=MainWindowName}" VerticalAlignment="Center" Width="{Binding Width, ElementName=MainWindowName}" RadiusX="4.5" RadiusY="4.5" Fill="White"/>
+            <Grid  Grid.Row="0">
+                <Grid.Resources>
+                    <Style TargetType="Button" BasedOn="{StaticResource ResourceKey=toolbarButtonStyle}"/>
+                </Grid.Resources>
+                <Rectangle x:Name="MainWindowToolBar" Grid.Row="0" Height="{Binding Height, ElementName=MainWindowName}" Width="{Binding Width, ElementName=MainWindowName}" RadiusX="4.5" RadiusY="4.5" Fill="White"  PreviewMouseDown="MainWindowToolBar_PreviewMouseDown"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+                    <Button Margin="0 4 4 4" Content="" Click="Minimize_Click" IsTabStop="False"/>
+                    <Button Margin="0 4 4 4" Content="" Click="Close_Click" IsTabStop="False"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                    <Button Margin="4 4 4 4" Content="" IsTabStop="False" Click="Button_Click"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <!--Edit window from here/-->
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="{StaticResource ResourceKey=SegoeSemiBold}"/>
+                </Style>
+            </Grid.Resources>
+            <StackPanel x:Name="MainLayout" Width="405">
+                <TextBlock Margin="8 0 0 18" Foreground="#3b7ba2" FontSize="14.5" HorizontalAlignment="Left">
+                    Hello, <TextBlock x:Name="accountName" FontFamily="{StaticResource ResourceKey=SegoeVarBold}">user name</TextBlock>.
+                </TextBlock>
+                <Grid>
+                    <TextBlock x:Name="plcHolderSearch" Text="Enter a country" Foreground="#FFC6D1D4" FontSize="14.4" Padding="39 7 5 6" Height="36" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="{StaticResource ResourceKey=SegoeVarDisplay}"/>
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="260"/>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition Width="128"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.Resources>
+                            <Style TargetType="Button" BasedOn="{StaticResource ResourceKey=btnStyle}"/>
+                        </Grid.Resources>
+                        <TextBox x:Name="searchbx" Grid.Column="0" Width="260" Height="36" Padding="30 0 0 0" Text="" Foreground="#3b7ba2" TextChanged="searchbx_TextChanged" PreviewKeyDown="searchbx_PreviewKeyDown" HorizontalAlignment="Left"/>
+                        <Button x:Name="Date" Content="" Grid.Column="2" Click="Date_Click" />
+                        <Button x:Name="UpdateDataEvent" Width="0" Height="0" Click="UpdateDataEvent_Click"/>
+                    </Grid>
+                    <TextBlock x:Name="searchButton" Text="" Foreground="#3b7ba2" FontSize="16" Padding="12 10 5 5" Width="36" Height="36" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="{StaticResource ResourceKey=MDL2}">
+                        <TextBlock.Resources>
+                            <Storyboard x:Key="SearchAnimation">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)" >
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.005" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.01" Value="5"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.02" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.03" Value="-5"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.05" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </TextBlock.Resources>
+                        <TextBlock.RenderTransform>
+                            <TranslateTransform X="0" Y="0" />
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                </Grid>
+                <TextBlock x:Name="countryName" Width="268" Margin="8 25 15 20" Text="World" HorizontalAlignment="Left" FontFamily="{StaticResource ResourceKey=SegoeVarBold}" Foreground="#FF3A516D" FontSize="36"/>
+                <!--<TextBlock Text="26/12/2021" Margin="10 -20 0 18" Foreground="#3b7ba2" FontSize="21" HorizontalAlignment="Left"/>-->
+
+                <Grid>
+                    <Grid.Resources>
+                        <Style TargetType="Button" BasedOn="{StaticResource CasesStyle}"/>
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="13*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="12*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <Grid>
+                            <Button x:Name="CasesButton" Height="134" Background="#0092E9" Margin="0 0 0 15" IsTabStop="False"/>
+                            <StackPanel Margin="20 10 10 10">
+                                <TextBlock FontSize="19.5" Foreground="White" Text="Cases"/>
+                                <TextBlock x:Name="totalCases" Margin="0 4 0 4" HorizontalAlignment="Left" FontFamily="{StaticResource ResourceKey=SegoeVarBold}" FontSize="28.5" Foreground="White" Text="No Data"/>
+                                <TextBlock x:Name="todayCases" FontSize="22.5" Foreground="White" Text="+0"/>
+                            </StackPanel>
+                        </Grid>
+                        <TextBlock Text="Recovered" Margin="10 10 10 -5" Foreground="#3b7ba2" FontSize="19.5" HorizontalAlignment="Left"/>
+                        <TextBlock x:Name="recovered" Margin="10 0 0 4" HorizontalAlignment="Left" FontFamily="{StaticResource ResourceKey=SegoeVarBold}" FontSize="28.5" Foreground="#0092E9" Text="0"/>
+                        <TextBlock Text="Deaths / cases" Margin="10 10 10 -5" Foreground="#3b7ba2" FontSize="19.5" HorizontalAlignment="Left"/>
+                        <TextBlock x:Name="deathsPerCases" Margin="10 0 0 4" HorizontalAlignment="Left" FontFamily="{StaticResource ResourceKey=SegoeVarBold}" FontSize="28.5" Foreground="#0092E9" Text="0%"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <Grid>
+                            <Button x:Name="DeathsButton" Height="134" Background="#3A516D" Margin="0 0 0 15" IsTabStop="False"/>
+                            <StackPanel Margin="20 10 10 10">
+                                <TextBlock FontSize="19.5" Foreground="White" Text="Deaths"/>
+                                <TextBlock x:Name="totalDeaths" Margin="0 4 0 4" HorizontalAlignment="Left" FontFamily="{StaticResource ResourceKey=SegoeVarBold}" FontSize="28.5" Foreground="White" Text="No Data"/>
+                                <TextBlock x:Name="todayDeaths" FontSize="22.5" Foreground="White" Text="+0"/>
+                            </StackPanel>
+                        </Grid>
+                        <TextBlock Text="Active cases" Margin="10 10 10 -5" Foreground="#3b7ba2" FontSize="19.5" HorizontalAlignment="Left"/>
+                        <TextBlock x:Name="activeCases" Margin="10 0 0 4" HorizontalAlignment="Left" FontFamily="{StaticResource ResourceKey=SegoeVarBold}" FontSize="28.5" Foreground="#0092E9" Text="0"/>
+                        <TextBlock Text="Recovered / cases" Margin="10 10 10 -5" Foreground="#3b7ba2" FontSize="19.5" HorizontalAlignment="Left"/>
+                        <TextBlock x:Name="recoverPerCases" Margin="10 0 0 4" HorizontalAlignment="Left" FontFamily="{StaticResource ResourceKey=SegoeVarBold}" FontSize="28.5" Foreground="#0092E9" Text="0%"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+
+        </Grid>
+
+    </Grid>
+
+
+</Window>
